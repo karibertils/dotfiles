@@ -91,10 +91,14 @@ Plugin 'tfnico/vim-gradle'
 Plugin 'markcornick/vim-terraform'
 
 """"""" kb
+set clipboard=unnamedplus
 set shell=/bin/bash
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/visincr'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'mbbill/undotree'
 nnoremap <F5> :UndotreeToggle<CR>
 nnoremap <C-D> :bd<CR>
