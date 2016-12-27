@@ -106,6 +106,9 @@ nnoremap <C-D> :bd<CR>
 nmap <silent> <C-A> :NERDTreeToggle<CR>
 nnoremap <silent> <C-L> :noh<CR><C-L>
 
+vmap "+y :!xclip -f -sel clip
+map "+p :r!xclip -o -sel clip
+
 """"" End Filetypes ====================
 
 """"" Utilities ========================
