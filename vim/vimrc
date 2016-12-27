@@ -100,6 +100,7 @@ Plugin 'vim-scripts/visincr'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'mbbill/undotree'
+Plugin 'fatih/vim-go'
 nnoremap <F5> :UndotreeToggle<CR>
 nnoremap <C-D> :bd<CR>
 
