@@ -1,7 +1,7 @@
 autoload -Uz compinit
 compinit
 
-#sed -i 's/compinit\ -d/compinit\ -u\ -d/g' ~/.antigen/init.zsh
+sed -i 's/compinit\ -d/compinit\ -u\ -d/g' ~/.antigen/init.zsh
 
 source <(kubectl completion zsh)
 source <(helm completion zsh)
@@ -25,7 +25,7 @@ antigen bundle zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme.
-antigen theme afowler#robbyrussell
+antigen theme afowler
 
 # Tell Antigen that you're done.
 antigen apply
