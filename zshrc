@@ -1,88 +1,62 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+autoload -Uz compinit
+compinit
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="lukerandall"
+#sed -i 's/compinit\ -d/compinit\ -u\ -d/g' ~/.antigen/init.zsh
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+source <(kubectl completion zsh)
+source <(helm completion zsh)
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+export ZSH_DISABLE_COMPFIX="true"
+export EDITOR=vim
+export PATH="/snap/bin:~/.npm-global/bin:~/.local/bin:$PATH"
+export KUBECONFIG=~/.kube/config
+export DATASTORE_TYPE=kubernetes
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+source ~/antigen.zsh
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+antigen use oh-my-zsh
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+antigen bundle colorize
+antigen bundle git
+#antigen bundle command-not-found
+antigen bundle yarn
+#antigen bundle docker-compose
+antigen bundle zsh-completions
+antigen bundle zsh-users/zsh-autosuggestions
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# Load the theme.
+antigen theme afowler#robbyrussell
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# Tell Antigen that you're done.
+antigen apply
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+alias dinfo="sh ~/scripts/docker_ips.sh"
+alias chrome="google-chrome --remote-debugging-port=9222"
+alias babel-node="babel-node --extensions .ts,.tsx,.js,.jsx"
+alias k="kubectl"
+alias backup-kube-cluster="kubectl cluster-info dump --output-directory=dump --all-namespaces"
+alias clip="xclip -sel cli <"
+alias killpod="kubectl delete pod --force --grace-period=0"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git mix)
-
-# User configuration
-
-# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-[[ $- = *i* ]] && source ~/liquidprompt/liquidprompt
+fpath=(~/.zsh-completions $fpath)
 
 setopt NO_HUP
+
+bindkey -v
+
+#bindkey '^P' up-history
+#bindkey '^N' down-history
+#bindkey '^?' backward-delete-char
+#bindkey '^h' backward-delete-char
+#bindkey '^w' backward-kill-word
+#bindkey '^r' history-incremental-search-backward
+
+#function zle-line-init zle-keymap-select {
+#    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+#    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$(git_custom_status) $EPS1"
+#    zle reset-prompt
+#}
+
+#zle -N zle-line-init
+#zle -N zle-keymap-select
+#export KEYTIMEOUT=1
